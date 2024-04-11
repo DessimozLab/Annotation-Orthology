@@ -1,0 +1,3 @@
+Four proteomes were predicted in parallel (Salmo trutta, Erpetoichthys calabaricus, Echeneis naucrates and Oryzias latipes) due to the very long time that prediction took otherwise. We followed the "Supplemental Protocol 20—Data Parallelization" from Hoff, Katharina J., and Mario Stanke. 2019. “Predicting Genes in Single Genomes with AUGUSTUS.” Current Protocols in Bioinformatics / Editoral Board, Andreas D. Baxevanis ... [et Al.] 65 (1): e57.
+
+There are some preprocessing steps to divide the genome assemblies into chunks that we have not included here. Please, refer to the Supplemental Protocol 20 for more information. The scripts we used for preprocessing are available in the Augustus software as splitMfasta.pl and summarizeACGTcontent.pl.
