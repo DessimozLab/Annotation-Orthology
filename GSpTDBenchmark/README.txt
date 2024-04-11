@@ -1,6 +1,6 @@
 Before running the benchmark, there are some pre processing steps to be done:
-1) the prep_bs_from_omastandalone.drw script needs to be copied in the base directory of each OMA run 
-2)subsequently, the next command should be run (once for each Annotation set, from the OMA run directory:
+1) The prep_bs_from_omastandalone.drw script needs to be copied in the base directory of each OMA run 
+2)Subsequently, the next command should be run (once for each Annotation set, from the OMA run directory:
 ```
 echo "ReadProgram('parameters.drw'); ReadProgram('prep_bs_from_omastandalone.drw');" | bin/omadarwin
 ```
@@ -9,10 +9,12 @@ echo "ReadProgram('parameters.drw'); ReadProgram('prep_bs_from_omastandalone.drw
 3) Create your repo from https://github.com/qfo/benchmark-webservice.git
 4) Go to the generateData subdirectory of the benchmarking directory (the git repo) and export a QFO_REFSET_PATH to the directory of the OMA run you want to run the benchmark on, specifically to the subdirectory that we created in the previous step 2 (e.g. export QFO_REFSET_PATH=<pathto/OMAStandalone/run/for_benchmarking>)
 
-5) run 
+5) Run:
+ 
 ```
 python generate_json_mapping.py -e
 ```
+
 This should generate mapping.json.gz within the for_benchmarking folder
 
 6) If you are using a newick species tree, you will need also the file generate_speciestree_samples_silvia.py, which is provided in this repo (Annotation-Orthology) in the generateData directory. Alternatively, if the species tree is input as phyloxml simply use generate_speciestree_samples.py, which is the original file in the benchmark repo.
