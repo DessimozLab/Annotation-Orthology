@@ -1,0 +1,168 @@
+# ***** BEGIN LICENSE BLOCK *****
+# Version: MPL 2.0
+#
+# The contents of this file are subject to the Mozilla Public License Version
+# 2.0 (the "License"); you may not use this file except in compliance with
+# the License. You may obtain a copy of the License at
+# http://www.mozilla.org/MPL/2.0/
+#
+# Software distributed under the License is distributed on an "AS IS" basis,
+# WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+# for the specific language governing rights and limitations under the
+# License.
+#
+# The Original Code is OMA standalone.
+#
+# The Initial Developer of the Original Code is CBRG Research Group; 
+# ETH Zurich; Switzerland.
+# Portions created by the Initial Developer are Copyright (C) 2005-2015
+# the Initial Developer. All Rights Reserved.
+#
+# Contributor(s):
+#   Christophe Dessimoz <cdessimoz@ucl.ac.uk>
+#   Adrian Altenhoff <adrian.altenhoff@inf.ethz.ch>
+#   Stefan Zoller <stefan.zoller@inf.ethz.ch>
+#   Adrian Schneider <adrian.schneider@inf.ethz.ch>
+#   Alexander Roth <alexander.roth@inf.ethz.ch>
+#   Gaston Gonnet <gonnet@inf.ethz.ch>
+#
+# ***** END LICENSE BLOCK *****
+# Set(quiet):
+##############################################################################
+#       ___           ___           ___
+#      /\  \         /\__\         /\  \    
+#     /::\  \       /::|  |       /::\  \   
+#    /:/\:\  \     /:|:|  |      /:/\:\  \  
+#   /:/  \:\  \   /:/|:|__|__   /::\~\:\  \ 
+#  /:/__/ \:\__\ /:/ |::::\__\ /:/\:\ \:\__\
+#  \:\  \ /:/  / \/__/~~/:/  / \/__\:\/:/  /
+#   \:\  /:/  /        /:/  /       \::/  / 
+#    \:\/:/  /        /:/  /        /:/  /  
+#     \::/  /        /:/  /        /:/  /   
+#      \/__/         \/__/         \/__/    
+#
+#       Stand-alone version
+#          (c) CBRG (ETH Zurich) 2004-2015
+#          (c) Dessimoz Lab (UCL and UNIL) 2013-2015
+##############################################################################
+# Usage
+#
+#   This script identifies orthologs among genomes using the OMA procedure.
+#   (http://omabrowser.org).
+#
+#   If you received this script per standalone installer for OMA, please have
+#   also a look at the included README.oma file in the installation folder
+#   (default location is /usr/local/oma).
+#
+#   - Run this script from the same directory.
+#   - Script parameters are set in parameters.drw in the same directory
+#   - Each genome should have its own fasta file (filename ending with .fa)
+#     and be placed in a directory called DB/
+#
+##############################################################################
+
+Set(gc=1e8):
+SetRandSeed():
+GetStats := true;
+
+if assigned(AuxDataPath) then 
+    datadirname := AuxDataPath;
+    if datadirname[1..2] = '~/' then 
+        datadirname := getenv('HOME').datadirname[2..-1]
+    fi:
+else
+    datadirname := getenv('HOME').'/.cache/oma';
+fi:
+
+# Read libraries
+if assigned(libdir) then
+    if libdir[-1]<>'/' then libdir := libdir .'/' fi:
+    ReadProgram( libdir . 'darwinit'):
+else
+    ReadProgram('lib/darwinit'):
+fi:
+ReadProgram('lib/AltSplicing');
+
+# Convert FASTA databases to darwin databases
+print('Starting database conversion and checks...');
+
+if not assigned(Datasets) then
+    G := TimedCallSystem('find -L DB -name "*.fa" -print')[2];
+    G := sort(SearchDelim('\n',G));
+else
+    G := Datasets;
+fi:
+
+# get nr of total parallel process and number of this job.
+pinf := traperror(DetectParallelInfo()):
+if pinf=lasterror then
+    printf('ERROR: %a\n', pinf);
+    exit(1);
+fi:
+print(pinf);
+
+# check that OutputFolder contains no spaces
+for c in [' ','\n','\t','\c','\r'] do if SearchString(c, OutputFolder) >= 0 then
+    error('found invalid character in ''OutputFolder'' argument (no spaces allowed).');
+fi od:
+OutputFolder := NormalizePath(OutputFolder);
+
+if InputDataType='DNA' then
+    ReadProgram(If(assigned(libdir),libdir,'lib') . '/DNA_matrix');
+    CreateDayMatrices(DNA_Counts);
+    DM := DayMatrix(50):
+elif not assigned(InputDataType) or InputDataType='AA' then
+    CreateDayMatrices();
+    DM := DayMatrix(224):
+else error('unexpected value for ''InputDataType'': '.str(InputDataType));
+fi:
+
+# this assinges DBs, GS, genomes, isContig and DB
+ConvertGenomes(G, pinf);
+
+NG := length(genomes):
+print(genomes);
+
+Set(printgc=false);
+CallSystem('mkdir -p for_benchmarking');
+OpenWriting('for_benchmarking/Summaries.drw'):
+printf('GenomeSummaries := table(): genomes := []:\n');
+for g in genomes do
+    printf('genomes := append(genomes, %A):\n', g);
+    gs := copy(GS[g]):
+    gs['Kingdom'] := 'Eukaryota';
+    gs['Id'] := string(g);
+    gs['Lineage'] := ['Eukaryota', string(g)];
+    printf('GenomeSummaries[%A] := %A:\n', g, gs);
+od:
+OpenWriting(previous):
+
+
+used_splice_str := ReadRawFile('Output/used_splicing_variants.txt'):
+main_multi := {seq(SearchDelim('\t', trim(line))[2], line=SplitLines(used_splice_str))}:
+
+OpenWriting('for_benchmarking/ServerIndexed.db'):
+for g in genomes do
+    DB := ReadDb(GS[g,FileName]);
+    splicemap := LoadSpliceMap(g);
+    is_main := CreateArray(1..DB['TotEntries'], true):
+    for gene in splicemap do for z in gene do 
+        if not member(SearchTag('ID', Entry(z)), main_multi) then is_main[z] := false fi:
+    od od:
+
+    for i to DB[TotEntries] do 
+        e := Entry(i):
+        e := ReplaceString('<ID>','<OS>'.g.'</OS><MAPIDS>', e);
+        e := ReplaceString('</ID>', '</MAPIDS>', e);
+        if not is_main[i] then
+           e := ReplaceString('</E>', '<MINOR_ISOFORM>true</MINOR_ISOFORM></E>', e)
+        fi:
+        prints(e):
+    od:
+od:
+OpenWriting(previous):
+
+CallSystem('cd for_benchmarking/; ln -s ServerIndexed.db ServerSeqs.db');
+
+
+done         
