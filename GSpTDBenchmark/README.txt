@@ -1,6 +1,6 @@
 Before running the benchmark, there are some pre processing steps to be done:
 1) The prep_bs_from_omastandalone.drw script needs to be copied in the base directory of each OMA run 
-2)Subsequently, the next command should be run (once for each Annotation set, from the OMA run directory:
+2)Subsequently, the next command should be run (once for each Annotation set), from the OMA run directory:
 ```
 echo "ReadProgram('parameters.drw'); ReadProgram('prep_bs_from_omastandalone.drw');" | bin/omadarwin
 ```
