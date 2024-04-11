@@ -4,18 +4,22 @@ Before running the benchmark, there are some pre processing steps to be done:
 echo "ReadProgram('parameters.drw'); ReadProgram('prep_bs_from_omastandalone.drw');" | bin/omadarwin
 
 This should render a new subdirectory (for_benchmarking) with 2 files and 1 symlink (Summaries.drw, ServerSeqs.db and ServerIndexed.db)
+3) Create your repo from https://github.com/qfo/benchmark-webservice.git
+4) Go to the generateData subdirectory of the benchmarking directory (the git repo) and export a QFO_REFSET_PATH to the directory of the OMA run you want to run the benchmark on, specifically to the subdirectory that we created in the previous step 2 (e.g. export QFO_REFSET_PATH=<pathto/OMAStandalone/run/for_benchmarking>)
 
-3) Go to the generateData subdirectory of the benchmarking directory (which is actually a git repo from https://github.com/qfo/benchmark-webservice.git with small modifications) and export a QFO_REFSET_PATH to the directory of the OMA run you want to run the benchmark on, specifically to the subdirectory that we created in the previous step 2 (e.g. export QFO_REFSET_PATH=<pathto/OMAStandalone/run/for_benchmarking>)
-
-4) run python generate_json_mapping.py -e
+5) run python generate_json_mapping.py -e
 This should generate mapping.json.gz within the for_benchmarking folder
 
-5) Then, run: python generate_speciestree_samples_silvia.py --tree-size 10 Luca --out $QFO_REFSET_PATH <pathto/OMAStandalone/run/SpeciesTree.nwk (Alternatively, if the species tree is input as phyloxml simply use generate_speciestree_samples.py)
+6) If you are using a newick species tree, you will need also the file generate_speciestree_samples_silvia.py, which is provided in this repo (Annotation-Orthology) in the generateData directory. Alternatively, if the species tree is input as phyloxml simply use generate_speciestree_samples.py, which is the original file in the benchmark repo.
+7) Then, run: 
+python generate_speciestree_samples_silvia.py --tree-size 10 Luca --out $QFO_REFSET_PATH <pathto/OMAStandalone/run/SpeciesTree.nwk
 
 Now you are ready to run the nextflow pipeline of the qfo_benchmark
 
 
 For running the benchmark, you will need to use singularity or docker as it uses an external image (see nextflow.config).
-The benchmark is run by running the nextflow main.nf file. First, you will need to change the $QFO_REFSET_PATH: export $QFO_REFSET_PATH=<pathto/OMAStandalone/run>
+The benchmark is run by running the nextflow main.nf file. First, you will need to:
+1) change the $QFO_REFSET_PATH: export $QFO_REFSET_PATH=<pathto/OMAStandalone/run>
+2) change the nextflow.config file to the one provided in this repo (Annotation-Orthology), which might need some further changes if you use docker instead of singularity.
 A sample command for running the benchmark is the following.
 nextflow run main.nf -profile singularity --results_dir ./obs_out --goldstandard_dir $QFO_REFSET_PATH/for_benchmarking/ --challenges_ids " G_STD2_Luca" --assess_dir ./reference_data/data --participant_id topEnsembl  --input $QFO_REFSET_PATH/Output/HierarchicalGroups.orthoxml
