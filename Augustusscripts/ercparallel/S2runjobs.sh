@@ -12,4 +12,4 @@
 
 module load gcc augustus
 
-/work/FAC/FBM/DBC/cdessim2/default/sprietob/assemblies20/ercparallel/ERCALaugjob_"${SLURM_ARRAY_TASK_ID}"
+./ercparallel/ERCALaugjob_"${SLURM_ARRAY_TASK_ID}"

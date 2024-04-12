@@ -13,4 +13,4 @@
 
 module load gcc augustus
 
-/work/FAC/FBM/DBC/cdessim2/default/sprietob/assemblies20/ecnauparallel/ECNAUaugjob_"${SLURM_ARRAY_TASK_ID}"
+./ecnauparallel/ECNAUaugjob_"${SLURM_ARRAY_TASK_ID}"
