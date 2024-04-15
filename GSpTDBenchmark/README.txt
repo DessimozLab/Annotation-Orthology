@@ -30,6 +30,17 @@ The benchmark is run by running the nextflow main.nf file. First, you will need 
 1) change the $QFO_REFSET_PATH: export $QFO_REFSET_PATH=<pathto/OMAStandalone/run>
 2) change the nextflow.config file to the one provided in this repo (Annotation-Orthology), which might need some further changes if you use docker instead of singularity.
 A sample command for running the benchmark is the following.
+
 ```
 nextflow run main.nf -profile singularity --results_dir ./obs_out --goldstandard_dir $QFO_REFSET_PATH/for_benchmarking/ --challenges_ids " G_STD2_Luca" --assess_dir ./reference_data/data --participant_id topEnsembl  --input $QFO_REFSET_PATH/Output/HierarchicalGroups.orthoxml
+```
+
+For running the benchmark on the OrthoFinder results, you need to obtain a 'Total.tsv' file which includes all the ortholog pairs for each annotation set, which you can do using the Jupyter notebook "OrthoFinder_adapt_benchmarking2". Then, export the QFO_REFSET_PATH to the corresponding OMA directory (e.g. if you are going to benchmark OrthoFinder's topEnsembl orthologues, you should export the path to the OMA top Ensembl run):
+
+export $QFO_REFSET_PATH=<yourpath/to/OMAtopEnsemblrun/>
+
+Next, to run the benchmark, use:
+
+```
+nextflow run main.nf -profile singularity --results_dir ./obs_out --goldstandard_dir $QFO_REFSET_PATH/for_benchmarking/  --challenges_ids " G_STD2_Luca" --assess_dir ./obs_out/results --participant_id AugustusOF --input </your/pathto/OrthoFinder/Results/Orthologues/Total.tsv>
 ```
