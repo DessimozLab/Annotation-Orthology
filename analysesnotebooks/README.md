@@ -2,7 +2,7 @@ Bellow there is a summary of the notebooks outputs and necessary inputs. We prov
 In some cases, trees are also needed. These can be found in the Trees subdirectory.
 
 Check the following notebooks to produce the specified files:
-** 1) Genelength_notebook: **
+**1) Genelength_notebook:**
 
 - CanonicalProteinsLength3_correction.csv
 - NonOrthologous-Canonical-Proteins_length.csv
@@ -12,7 +12,7 @@ Check the following notebooks to produce the specified files:
 - Figures: 6, S6, S7, S8
 
 
-** 2)	Stats-counts **
+**2)	Stats-counts**
 - Figures: 1, 2 and 3
 - Statsmerge.csv
 - Ortholog_numbers.csv
@@ -20,12 +20,12 @@ Check the following notebooks to produce the specified files:
 
 (Inputs: ProtLengthStats_canonical_4methods_2.csv, species20tree.nwk, cladogram20species.nwk)
 
-** 3)	Augustus_explanatory_analysis **
+**3)	Augustus_explanatory_analysis**
 - Figures: S1, S2 and S3
 
 (Inputs: Statsmerge.csv and Species_info_paper.csv. The latter was done manually)
 
-** 4)	HOGs_analyses-figures **
+**4)	HOGs_analyses-figures**
 - Figures: 4 and S4
 - HOGsizestats.csv
 - HOGstats.csv
