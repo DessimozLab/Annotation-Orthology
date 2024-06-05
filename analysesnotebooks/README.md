@@ -17,11 +17,13 @@ Check the following notebooks to produce the specified files:
 - Statsmerge.csv
 - Ortholog_numbers.csv
 - NumberofGenes_stats.csv
-- (Inputs: ProtLengthStats_canonical_4methods_2.csv, species20tree.nwk, cladogram20species.nwk)
+
+(Inputs: ProtLengthStats_canonical_4methods_2.csv, species20tree.nwk, cladogram20species.nwk)
 
 3)	Augustus_explanatory_analysis
 - Figures: S1, S2 and S3
-- (Inputs: Statsmerge.csv and Species_info_paper.csv. The latter was done manually)
+
+(Inputs: Statsmerge.csv and Species_info_paper.csv. The latter was done manually)
 
 4)	HOGs_analyses-figures
 - Figures: 4 and S4
