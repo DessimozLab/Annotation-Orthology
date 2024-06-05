@@ -5,7 +5,7 @@ Before running the benchmark, there are some pre processing steps to be done:
 ```
 echo "ReadProgram('parameters.drw'); ReadProgram('prep_bs_from_omastandalone.drw');" | bin/omadarwin
 ```
--->This should render a new subdirectory (for_benchmarking) with 2 files and 1 symlink (Summaries.drw, ServerSeqs.db and ServerIndexed.db)
+--> This should render a new subdirectory (for_benchmarking) with 2 files and 1 symlink (Summaries.drw, ServerSeqs.db and ServerIndexed.db)
 
 3) Create your repo from https://github.com/qfo/benchmark-webservice.git
 4) Go to the generateData subdirectory of the benchmarking directory (the git repo) and export a QFO_REFSET_PATH to the directory of the OMA run you want to run the benchmark on, specifically to the subdirectory that we created in the previous step 2 (e.g. export QFO_REFSET_PATH=<pathto/OMAStandalone/run/for_benchmarking>)
