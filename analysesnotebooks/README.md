@@ -1,8 +1,9 @@
-Bellow there is a summary of the notebooks outputs and necessary inputs. We provide the code to produce the tables used in the analyses and in figures constructions. There are some cases in which these takes a long time. We also provide precomputed tables to run the code more quickly in the Tables subdirectory of this repo.
+Bellow there is a summary of the notebooks outputs and necessary inputs. We provide the code to produce the tables used in the analyses and in figures constructions. There are some cases in which these take a long time. We also provide precomputed tables to run the code more quickly in the Tables subdirectory of this repo.
 In some cases, trees are also needed. These can be found in the Trees subdirectory.
 
 Check the following notebooks to produce the specified files:
-1) Genelength_notebook
+1) Genelength_notebook:
+
 CanonicalProteinsLength3_correction.csv
 NonOrthologous-Canonical-Proteins_length.csv
 Orthologous-Canonical-Proteins_length.csv
