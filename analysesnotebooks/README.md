@@ -21,7 +21,7 @@ Check the following notebooks to produce the specified files:
 
 3)	Augustus_explanatory_analysis
 - Figures: S1, S2 and S3
-(Inputs: Statsmerge.csv and Species_info_paper.csv. The latter was manually done)
+- (Inputs: Statsmerge.csv and Species_info_paper.csv. The latter was done manually)
 
 4)	HOGs_analyses-figures
 - Figures: 4 and S4
