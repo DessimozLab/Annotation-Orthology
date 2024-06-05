@@ -2,7 +2,7 @@ Bellow there is a summary of the notebooks outputs and necessary inputs. We prov
 In some cases, trees are also needed. These can be found in the Trees subdirectory.
 
 Check the following notebooks to produce the specified files:
-1)	Genelength_notebook
+1) Genelength_notebook
 CanonicalProteinsLength3_correction.csv
 NonOrthologous-Canonical-Proteins_length.csv
 Orthologous-Canonical-Proteins_length.csv
