@@ -17,7 +17,7 @@ Check the following notebooks to produce the specified files:
 - Statsmerge.csv
 - Ortholog_numbers.csv
 - NumberofGenes_stats.csv
-(Inputs: ProtLengthStats_canonical_4methods_2.csv, species20tree.nwk, cladogram20species.nwk)
+- (Inputs: ProtLengthStats_canonical_4methods_2.csv, species20tree.nwk, cladogram20species.nwk)
 
 3)	Augustus_explanatory_analysis
 - Figures: S1, S2 and S3
