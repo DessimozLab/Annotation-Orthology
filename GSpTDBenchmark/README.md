@@ -43,5 +43,5 @@ export $QFO_REFSET_PATH=<yourpath/to/OMAtopEnsemblrun/>
 Next, to run the benchmark, use:
 
 ```
-nextflow run main.nf -profile singularity --results_dir ./obs_out --goldstandard_dir $QFO_REFSET_PATH/for_benchmarking/  --challenges_ids " G_STD2_Luca" --assess_dir ./obs_out/results --participant_id AugustusOF --input </your/pathto/OrthoFinder/Results/Orthologues/Total.tsv>
+nextflow run main.nf -profile singularity --results_dir ./obs_out --goldstandard_dir $QFO_REFSET_PATH/for_benchmarking/  --challenges_ids " G_STD2_Luca" --assess_dir ./obs_out/results --participant_id topEnsemblOF --input </your/pathto/OrthoFinder/Results/Orthologues/Total.tsv>
 ```
