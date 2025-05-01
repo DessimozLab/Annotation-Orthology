@@ -36,9 +36,9 @@ A sample command for running the benchmark is the following.
 nextflow run main.nf -profile singularity --results_dir ./obs_out --goldstandard_dir $QFO_REFSET_PATH/for_benchmarking/ --challenges_ids " G_STD2_Luca" --assess_dir ./reference_data/data --participant_id topEnsembl  --input $QFO_REFSET_PATH/Output/HierarchicalGroups.orthoxml
 ```
 
-For running the benchmark on the OrthoFinder results, you need to obtain a 'Total.tsv' file which includes all the ortholog pairs for each annotation set, which you can do using the Jupyter notebook "OrthoFinder_adapt_benchmarking2". Then, export the QFO_REFSET_PATH to the corresponding OMA directory (e.g. if you are going to benchmark OrthoFinder's topEnsembl orthologues, you should export the path to the OMA top Ensembl run):
+For running the benchmark on the OrthoFinder results, you need to obtain a 'Total.tsv' file which includes all the ortholog pairs for each annotation set, which you can do using the Jupyter notebook "OrthoFinder_adapt_benchmarking2". The benchmark will Total.tsv input, which contains all orthologous genes inferred by OrthoFinder. Then, export the QFO_REFSET_PATH to the corresponding OMA directory (e.g. if you are going to benchmark OrthoFinder's topEnsembl orthologues, you should export the path to the OMA top Ensembl run):
 
-export $QFO_REFSET_PATH=<yourpath/to/OMAtopEnsemblrun/>
+export QFO_REFSET_PATH=<yourpath/to/OMAtopEnsemblrun/>
 
 Next, to run the benchmark, use:
 
