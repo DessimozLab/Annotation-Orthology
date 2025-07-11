@@ -6,6 +6,7 @@ There are also README files within subdirectories to help with the analyses.
 - In OMA, you can find sample scripts to run OMA
 - In OrthoFinder, there are sample scripts to run OF
 - In Augustusscripts, the scripts we used to run this software
+- In GffCompare, scripts to process gffs prior to running GffCompare as well as scripts to run it
 - In Trees, newick tree files used in the jupyter notebooks
 - In GSpTDBenchmark, instructions and complementary scripts to run the Generalised Species Tree Discordance Benchmark, for which you will also need the git repo: https://github.com/qfo/benchmark-webservice.git
 - In analysesnotebooks, the Jupyter Notebooks (python) used to produce our results and figures
