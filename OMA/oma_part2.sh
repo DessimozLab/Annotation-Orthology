@@ -1,6 +1,5 @@
 #!/bin/bash
   
-#SBATCH --account=cdessim2_default
 #SBATCH --array=1-500
 #SBATCH --partition=cpu
 #SBATCH --time=7:00:00
