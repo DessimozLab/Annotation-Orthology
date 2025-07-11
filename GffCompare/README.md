@@ -1,8 +1,8 @@
 Before running GffCompare, there are some steps to be completed:
 1. Correct the NCBI chromosome names:
 
-1.1. First, use "download_seq_report.sh" to get all the genomes seq reports.
-1.2. Run "repl_chrs2.py". This will output "corrected" versions of the downloaded gff files with extension "_corrected.gff"
+- 1.1. First, use "download_seq_report.sh" to get all the genomes seq reports.
+- 1.2. Run "repl_chrs2.py". This will output "corrected" versions of the downloaded gff files with extension "_corrected.gff"
 
 2. Filter the _corrected.gff's to contain only protein coding genes, using: "extract_prot-coding-genes_gffs-NCBI.sh" and "extract_prot-coding-genes_gffs-Ensembl.sh" . The output files will have the extension "_protein_coding.gff".
 
